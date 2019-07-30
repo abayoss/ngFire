@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-md-6">
+    <h1>{{ client.firstName }}</h1>
+  </div>
+  <div class="col-md-6 text-right">
+    <a routerLink="/" class="btn btn-default">
+      <i class="fa fa-arrow-left"></i> Back to list
+    </a>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8 mx-auto ">
+    <form>
+      <div class="form-group">
+        <label for="lastName">lastName : </label> {{ client.lastName }}
+      </div>
+      <div class="form-group">
+        <label for="telephone">telephone : </label> {{ client.telephone }}
+      </div>
+      <div class="form-group">
+        <label for="email">email : </label> {{ client.email }}
+      </div>
+      <div class="form-group">
+        <label for="balance">balance : </label> {{ client.balance | currency }}
+      </div>
+
+      <!-- <button class="btn btn-primary btn-block"><i class="fa fa-send"></i> New Client</button> -->
+      <button
+        [routerLink]="['/edit', clientid]"
+        routerLinkActive="router-link-active"
+        class="btn btn-block btn-warning"
+      >
+        <i class="fa fa-pencil"></i>
+      </button>
+      <button class="btn btn-block btn-danger" (click)="deleteClient()">
+        <i class="fa fa-trash"></i>
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,85 @@
+
+ <div class="row">
+   <div class="col-md-6">
+     <h1>List of clients</h1>
+   </div>
+   <div class="col-md-6 text-right">
+     <a routerLink="/add" class="btn btn-default"><i class="fa fa-plus"></i> Add Client</a>
+   </div>
+ </div>
+
+ <!-- <div class="row">
+   <div class="col-md-3 offset-md-9 text-right">
+      <h3>Total: {{ total | currency }}</h3>
+   </div>
+ </div> -->
+
+ <div class="row">
+   <div class="col-md-12">
+
+    <input (keyup)="searchClient()" [(ngModel)]="search" type="text" class="form-control" placeholder="Search...">
+
+     <table class="table table-striped">
+       <thead>
+         <tr>
+           <th>Image</th>
+           <th>Status</th>
+           <th>Fullname</th>
+           <th>Telephone</th>
+           <th>Email</th>
+           <th>Balance</th>
+           <th class="text-center">Actions</th>
+         </tr>
+       </thead>
+       <tbody>
+         <tr *ngFor="let client of searchClients"
+         (dblclick)="deleteClient(client.id)"
+         >
+           <td>
+             <img height="100" [src]="client?.image" [alt]="client.email">
+           </td>
+           <td>
+             <button class="btn btn-sm" [ngClass]="{
+               'btn-success': client.active,
+               'btn-danger': !client.active
+             }" (click)="toggleStatus(client)">
+               <i class="fa fa-power-off"></i>
+             </button>
+           </td>
+           <td>
+            {{ client.firstName | titlecase }} {{ client.lastName | lowercase }}</td>
+           <td>{{ client.telephone }}</td>
+           <td>{{ client.email }}</td>
+           <td>{{ client.balance | currency }}</td>
+           <td class="text-center">
+              <button
+              [routerLink]="['/show', client.id]"
+              routerLinkActive="router-link-active"
+              class="btn btn-sm btn-primary"
+              title="show"
+            >
+              <i class="fa fa-eye"></i>
+            </button>
+             <a [routerLink]="['/edit', client.id]" class="btn btn-sm mx-2 btn-info">
+               <i class="fa fa-pencil"></i>
+             </a>
+
+             <button class="btn btn-sm btn-warning"
+              (click)="deleteClient(client.id)">
+               <i class="fa fa-trash"></i>
+             </button>
+           </td>
+         </tr>
+         <tr>
+           <td></td>
+           <td></td>
+           <td></td>
+           <td></td>
+           <td></td>
+           <td>Total: {{ total | currency }}</td>
+           <td></td>
+         </tr>
+       </tbody>
+     </table>
+   </div>
+ </div>
